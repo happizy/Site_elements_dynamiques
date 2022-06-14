@@ -274,6 +274,7 @@ body {
     flex-direction: column;
     transition: 0.3s background-color;
     width: 25rem;
+    height: 60vh;
   }
   
   .contact-form h3{
@@ -308,4 +309,17 @@ body {
   
   .contact-form .form-input{
     margin-bottom: 1.5rem;
+  }
+
+  .text{
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .colusrnf{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
