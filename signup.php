@@ -1,32 +1,4 @@
-<?php
-    $link = mysqli_connect('localhost', 'root', '') or die ('Error connecting to mysql: ' . mysqli_error($link).'\r\n');
 
-    if (isset($_POST['mdp'])){
-        $nom = htmlspecialchars($_POST['nom']);
-        $prenom = htmlspecialchars($_POST['prenom']);
-        $email = htmlspecialchars($_POST['email']);
-        $login = htmlspecialchars($_POST['login']);
-        $mdp = htmlspecialchars($_POST['mdp']);
-
-        $use="use site";
-        if (mysqli_query($link,$use)) {
-            printf(mysqli_error($link));
-        }
-
-        $notemail= mysqli_query($link, "select * from site.usertemp where email = '".$_POST['email']."'");
-        $notlogin= mysqli_query($link, "select * from site.usertemp where login = '".$_POST['login']."'");
-
-        if(!(mysqli_num_rows($notemail))){
-            if(!(mysqli_num_rows($notlogin))){
-                $insert="INSERT into usertemp VALUES ('$nom','$prenom','$email','$login',SHA1('$mdp'))";
-                if (!($insert=mysqli_query($link,$insert))) {
-                    printf("la: %s\n", mysqli_error($link));
-                }
-            }
-        } 
-        echo 'ouioui';
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="fr" >
@@ -50,7 +22,7 @@
             <input type="text" name="prenom" placeholder="Votre prénom" class="form-input" required>
             <input type="email" name="email" placeholder="Votre email" class="form-input" required>
             <input type="text" name="login" placeholder="Votre identifiant" class="form-input" required>
-            <input type="password" name="email" placeholder="Votre mot de passe" class="form-input" required>
+            <input type="password" name="mdp" placeholder="Votre mot de passe" class="form-input" required>
             <input type="submit" value="S'inscrire" class="btn">
         </form>
     </div>
@@ -106,3 +78,40 @@
 <script src="./js/script.js"></script>
 </body>
 </html>
+
+<?php
+$link = mysqli_connect('localhost', 'root', 'lannion') or die ('Error connecting to mysql: ' . mysqli_error($link).'\r\n');
+if (isset($_POST['mdp'])){
+    $nom = htmlspecialchars($_POST['nom']);
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $email = htmlspecialchars($_POST['email']);
+    $login = htmlspecialchars($_POST['login']);
+    $mdp = htmlspecialchars($_POST['mdp']);
+
+    $use="use site";
+    if (mysqli_query($link,$use)) {
+        printf(mysqli_error($link));
+    }
+
+    $notemail= mysqli_query($link, "select * from site.usertemp where mail = '".$_POST['email']."'");
+    $notlogin= mysqli_query($link, "select * from site.usertemp where login = '".$_POST['login']."'");
+    $banmail= mysqli_query($link, "select * from site.usrban where mail = '".$_POST['email']."'");
+
+    if(!(mysqli_num_rows($notemail))){
+        if(!(mysqli_num_rows($notlogin))){
+            if (!(mysqli_num_rows($banmail))) {
+                $insert="INSERT into userTemp VALUES ('$nom','$prenom','$email','$login',SHA1('$mdp'))";
+                if (!($insert=mysqli_query($link,$insert))) {
+                    printf("la: %s\n", mysqli_error($link));
+                }
+                echo "<script type='text/javascript'>document.location.replace('index_all.html');</script>"; 
+            }
+        }
+    }else if(mysqli_num_rows($banmail)){
+        echo "<script type='text/javascript'>document.location.replace('usrban.html');</script>"; 
+    }else{
+        echo "<script type='text/javascript'>document.location.replace('usrexist.html');</script>"; 
+    }
+}
+
+?>

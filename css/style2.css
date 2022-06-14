@@ -323,3 +323,45 @@ body {
     align-items: center;
     flex-direction: column;
   }
+
+  .missing h1{
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+  }
+
+  .cardban{
+    margin-top: 2.5rem;
+    background: linear-gradient(45deg, #fc575e 0, #90d5ec 100%);
+    background-size: 300%;
+    background-position: left;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 20px 20px 40px 40px;
+  }
+
+  .cardban h3{
+    color: #ffff;
+    padding: 1rem;
+    padding-top: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1rem;
+    letter-spacing: 0.3px;
+  }
+
+  .cardban svg{
+    padding: 1rem;
+    padding-bottom: 0;
+  }
+  
+  .cardban:hover{
+    transform: scale(1.1);
+    background-position: right;
+  }

@@ -2,7 +2,7 @@
 <html lang="fr" >
 <head>
   <meta charset="UTF-8">
-  <title>Inscription</title>
+  <title>Connexion</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
 <link rel="stylesheet" href="./css/style2.css">
@@ -12,20 +12,34 @@
 <div class="index-container">
     <div class="col">
         <div class="heading">
-            <h1>INSCRIPTION</h1>
+            <h1>CONNEXION</h1>
         </div>
         <form method="post" action="" class="contact-form">
-            <h3>Bienvenue chez nous...</h3>
-            <input type="text" name="nom" placeholder="Votre nom" class="form-input" required>
-            <input type="text" name="prenom" placeholder="Votre prénom" class="form-input" required>
-            <input type="email" name="email" placeholder="Votre email" class="form-input" required>
+            <h3>Bienvenue chez vous...</h3>
             <input type="text" name="login" placeholder="Votre identifiant" class="form-input" required>
-            <input type="password" name="email" placeholder="Votre mot de passe" class="form-input" required>
-            <input type="submit" value="S'inscrire" class="btn">
+            <input type="password" name="mdp" placeholder="Votre mot de passe" class="form-input" required>
+            <input type="submit" value="Se connecter" class="btn">
+            <div class="missing">
+                <h1>Login ou mot de passe incorrect*</h1>
+            </div>
         </form>
     </div>
 </div>
 <!-- partial -->
+
+<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+    <linearGradient id="my-cool-gradient" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fc575e" />
+      <stop offset="100%" stop-color="#90d5ec" />
+    </linearGradient>
+</svg>
+
+<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+    <linearGradient id="my-cool-gradientreverse" x2="1" y2="1">
+      <stop offset="0%" stop-color="#90d5ec" />
+      <stop offset="100%" stop-color="#fc575e" />
+    </linearGradient>
+</svg>
 
 <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
     <linearGradient id="my-cool-gradient" x2="1" y2="1">
@@ -76,3 +90,25 @@
 <script src="./js/script.js"></script>
 </body>
 </html>
+
+<?php
+    $link = mysqli_connect('localhost', 'root', 'lannion') or die ('Error connecting to mysql: ' . mysqli_error($link).'\r\n');
+
+    if (isset($_POST['mdp'])){
+        $login = htmlspecialchars($_POST['login']);
+        $mdp = sha1(htmlspecialchars($_POST['mdp']));
+
+        $use="use site";
+        if (mysqli_query($link,$use)) {
+            printf(mysqli_error($link));
+        }
+
+        $get = mysqli_query($link, "select * from site.usertemp where login = '".$login."' and mdp = '".$mdp."'");
+
+        if((mysqli_num_rows($get))){
+            echo "<script type='text/javascript'>document.location.replace('index_all.html');</script>";
+        } else {
+            echo "<script type='text/javascript'>document.location.replace('signin2.php');</script>"; 
+        }
+    }
+?>
