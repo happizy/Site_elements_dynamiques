@@ -365,3 +365,52 @@ body {
     transform: scale(1.1);
     background-position: right;
   }
+
+  .bar{
+    color: white;
+    text-align: center;
+    letter-spacing: -4px;
+    padding-top: 1rem;
+  }
+
+  .textuser{
+    text-align: center;
+    color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+
+  .scrolldiv{
+    width: 800px;
+    margin-left: 1rem;
+  }
+
+  .scrolldiv form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .scrolldiv::-webkit-scrollbar{
+    width: 5px;
+  }
+
+  /* width */
+  .scrolldiv::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.scrolldiv::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+.scrolldiv::-webkit-scrollbar-thumb {
+  background: #fa5a61;
+  border-radius: 10px;
+}
