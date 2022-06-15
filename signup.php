@@ -104,7 +104,7 @@ if (isset($_POST['mdp'])){
                 if (!($insert=mysqli_query($link,$insert))) {
                     printf("la: %s\n", mysqli_error($link));
                 }
-                echo "<script type='text/javascript'>document.location.replace('index_all.html');</script>"; 
+                echo "<script type='text/javascript'>document.location.replace('signin.php');</script>"; 
             }
         }
     }else if(mysqli_num_rows($banmail)){

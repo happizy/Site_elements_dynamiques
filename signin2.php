@@ -1,3 +1,5 @@
+<?php session_start(); ?> 
+
 <!DOCTYPE html>
 <html lang="fr" >
 <head>
@@ -103,10 +105,12 @@
             printf(mysqli_error($link));
         }
 
+        $_SESSION['login'] = $login;
+
         $get = mysqli_query($link, "select * from site.usertemp where login = '".$login."' and mdp = '".$mdp."'");
 
         if((mysqli_num_rows($get))){
-            echo "<script type='text/javascript'>document.location.replace('index_all.html');</script>";
+            echo "<script type='text/javascript'>document.location.replace('index_all.php');</script>";
         } else {
             echo "<script type='text/javascript'>document.location.replace('signin2.php');</script>"; 
         }
