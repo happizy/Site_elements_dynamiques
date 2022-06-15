@@ -19,27 +19,27 @@
         <div class="grid">
             <div class="about-grid">
                 <div class="about-card">
-                  <a target="_blank" href="clock.html">
+                  <a href="clock.html">
                     <img src="./assets/clock.png" class="carte "alt="">
                   </a>
                   <h3 class="title">Horloge</h3>
                 </div>
                 <div class="about-card">
-                  <a  target="_blank"href="geo.html">
+                  <a href="geo.html">
                     <img src="./assets/pin.png" alt="" class="carte">
                   </a>
                   <h3 class="title">POSITION</h3>
                 </div> 
                 
                 <div class="about-card">
-                  <a target="_blank" href="contact.html">
+                  <a href="contact.php">
                     <img src="./assets/cont.png" alt="" class="carte">
                   </a>
                   <h3 class="title">Contact</h3>
                 </div>
 
                 <div class="about-card">
-                    <a target="_blank" href="todo.html/https://www.youtube.com/watch?v=Y0t32PPB60g">
+                    <a href="todo.php">
                       <img src="./assets/todo.png" alt="" class="carte">
                     </a>
                     <h3 class="title">Pense-bête</h3>
@@ -101,5 +101,19 @@
 <?php
   if(!isset($_SESSION['login'])){
     echo "<script type='text/javascript'>document.location.replace('signin.php');</script>"; 
+  } else {
+    $link = mysqli_connect('localhost', 'root', 'lannion') or die ('Error connecting to mysql: ' . mysqli_error($link).'\r\n');
+    $login = htmlspecialchars($_SESSION['login']);
+
+    $use="use site";
+    if (mysqli_query($link,$use)) {
+        printf(mysqli_error($link));
+    }
+    
+    $is = mysqli_query($link, "select * from user where login = '".$login."'");
+
+    if(!(mysqli_num_rows($is))){
+      echo "<script type='text/javascript'>document.location.replace('verif.php');</script>"; 
+    }
   }
 ?>
